@@ -201,7 +201,9 @@ multiPackage:
             cp -an ${BOB_TOOL_PATHS[target-toolchain]}/$TOOLCHAIN_SYSROOT/* "install/${TARGET_SYSROOT}"
 
         packageScript: |
-            installStripAll toolchain/bin
-            installStripAll toolchain/libexec
+            pref=${GCC_PREFIX:-/usr}
+            pref="${pref#/}"
+            installStripAll ${pref}/bin
+            installStripAll ${pref}/libexec
 
         provideDeps: [ "*-tgt" ]
